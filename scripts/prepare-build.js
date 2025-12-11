@@ -1,4 +1,14 @@
-<!doctype html>
+import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const rootDir = join(__dirname, '..');
+const indexHtmlPath = join(rootDir, 'index.html');
+
+// Create a clean index.html for Vite build (without asset references)
+const cleanIndexHTML = `<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -26,9 +36,9 @@
       body.error { opacity: 1 !important; }
     </style>
     
-    <!-- Production assets (injected by build - will be ignored in dev mode) -->
-    <script type="module" crossorigin src="./assets/index-CuKIv0PY.js" data-production></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DUaeIWM2.css">
+    <!-- Production assets will be injected by inject-assets.js after build -->
+    <!-- This script is needed for Vite to bundle the app -->
+    <script type="module" src="/src/main.jsx"></script>
     
     <!-- Environment detection (runs after scripts are parsed) -->
     <script>
@@ -111,4 +121,18 @@
     </div>
     <div id="root"></div>
   </body>
-</html>
+</html>`;
+
+// Backup current index.html if it exists and has asset references
+if (existsSync(indexHtmlPath)) {
+  const currentContent = readFileSync(indexHtmlPath, 'utf8');
+  if (currentContent.includes('assets/index-')) {
+    // Save backup
+    writeFileSync(join(rootDir, 'index.html.backup'), currentContent);
+    console.log('💾 Backed up index.html');
+  }
+}
+
+// Write clean index.html for build
+writeFileSync(indexHtmlPath, cleanIndexHTML);
+console.log('✅ Prepared clean index.html for build');

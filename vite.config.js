@@ -17,6 +17,7 @@ export default defineConfig({
   publicDir: 'public',
   build: {
     // Garantir que os arquivos sejam gerados com hash único para evitar cache
+    emptyOutDir: true, // Limpar diretório de saída antes de build
     rollupOptions: {
       output: {
         // Forçar novos nomes de arquivo a cada build
@@ -25,6 +26,10 @@ export default defineConfig({
         assetFileNames: 'assets/[name]-[hash].[ext]'
       }
     }
+  },
+  // Desabilitar cache durante build para garantir que mudanças sejam detectadas
+  optimizeDeps: {
+    force: true
   }
 })
 

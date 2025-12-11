@@ -5,8 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/inject-assets.js && node scripts/deploy-prod.js",
-    "build:only": "vite build",
+    "clean": "rm -rf dist node_modules/.vite .vite",
+    "clean:assets": "rm -rf assets",
+    "prebuild": "node scripts/prepare-build.js",
+    "build": "npm run clean && npm run prebuild && vite build && node scripts/inject-assets.js && node scripts/deploy-prod.js",
+    "build:only": "npm run prebuild && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

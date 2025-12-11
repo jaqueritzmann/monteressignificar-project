@@ -32,7 +32,7 @@ const PixSection = () => {
         {/* Título e subtítulo centralizados no topo */}
         <div className="text-center mb-10">
           <h2 className="font-title text-[44px] font-bold text-offwhite mb-2">
-            Doe via PIX - TESTE
+            Doe via PIX - Teste
           </h2>
           <p className="font-body text-[18px] text-offwhite/90">
             Forma rápida e segura de contribuir

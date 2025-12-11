@@ -11,11 +11,11 @@ const distDir = join(rootDir, 'dist');
 function copyDir(src, dest) {
   mkdirSync(dest, { recursive: true });
   const entries = readdirSync(src, { withFileTypes: true });
-  
+
   for (const entry of entries) {
     const srcPath = join(src, entry.name);
     const destPath = join(dest, entry.name);
-    
+
     if (entry.isDirectory()) {
       copyDir(srcPath, destPath);
     } else {
@@ -31,19 +31,64 @@ function copyDir(src, dest) {
 // Function to remove directory recursively
 function removeDir(dir) {
   try {
-    if (existsSync(dir) && statSync(dir).isDirectory()) {
-      rmSync(dir, { recursive: true, force: true });
-    } else if (existsSync(dir)) {
-      rmSync(dir, { force: true });
+    if (existsSync(dir)) {
+      const stat = statSync(dir);
+      if (stat.isDirectory()) {
+        // Remove all contents first, then the directory itself
+        const entries = readdirSync(dir, { withFileTypes: true });
+        for (const entry of entries) {
+          const entryPath = join(dir, entry.name);
+          if (entry.isDirectory()) {
+            removeDir(entryPath);
+          } else {
+            rmSync(entryPath, { force: true });
+          }
+        }
+        // Remove the directory itself
+        rmSync(dir, { recursive: true, force: true });
+      } else {
+        rmSync(dir, { force: true });
+      }
     }
   } catch (error) {
     console.warn(`⚠️  Could not remove ${dir}:`, error.message);
+    // Try one more time with force
+    try {
+      rmSync(dir, { recursive: true, force: true });
+    } catch (retryError) {
+      console.warn(`⚠️  Retry failed for ${dir}:`, retryError.message);
+    }
   }
 }
 
 console.log('🚀 Deploying dist to root for PRODUCTION (static files)...');
 
 try {
+  // Always remove assets directory in root before copying to ensure clean state
+  const assetsDir = join(rootDir, 'assets');
+  if (existsSync(assetsDir)) {
+    console.log('🧹 Removing existing assets directory...');
+    // Force complete removal - remove all files first, then directory
+    try {
+      // Remove all files and subdirectories
+      const entries = readdirSync(assetsDir, { withFileTypes: true });
+      for (const entry of entries) {
+        const entryPath = join(assetsDir, entry.name);
+        if (entry.isDirectory()) {
+          rmSync(entryPath, { recursive: true, force: true });
+        } else {
+          rmSync(entryPath, { force: true });
+        }
+      }
+      // Remove the directory itself
+      rmSync(assetsDir, { recursive: true, force: true });
+    } catch (error) {
+      console.warn(`⚠️  Error removing assets directory:`, error.message);
+      // Try alternative method
+      removeDir(assetsDir);
+    }
+  }
+
   // Check if dist directory exists
   if (!existsSync(distDir) || !statSync(distDir).isDirectory()) {
     console.error('❌ Error: dist directory not found. Run "npm run build:only" first.');
@@ -55,15 +100,19 @@ try {
 
   // Get all files and directories in dist
   const entries = readdirSync(distDir, { withFileTypes: true });
-  
+
   for (const entry of entries) {
     const srcPath = join(distDir, entry.name);
     const destPath = join(rootDir, entry.name);
-    
+
     try {
       if (entry.isDirectory()) {
-        // Remove existing directory if it exists to ensure clean copy
-        removeDir(destPath);
+        // Remove existing directory completely before copying to ensure clean state
+        // This is especially important for assets/ which may have old files with different hashes
+        if (existsSync(destPath)) {
+          console.log(`🧹 Cleaning existing directory: ${entry.name}`);
+          removeDir(destPath);
+        }
         copyDir(srcPath, destPath);
         console.log(`✅ Copied directory: ${entry.name}`);
       } else {
