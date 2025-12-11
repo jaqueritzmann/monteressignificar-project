@@ -1,4 +1,4 @@
-.PHONY: help install dev build clean deploy rollout preview test check
+.PHONY: help install dev build clean deploy rollout preview test check commit-msg
 
 # Colors for output
 BLUE := \033[0;34m
@@ -80,10 +80,19 @@ rollout: ## Faz o rollout completo (build + git commit + push)
 	@echo ""
 	@read -p "$(YELLOW)3️⃣  Deseja fazer commit e push? (s/N): $(NC)" confirm && \
 	if [ "$$confirm" = "s" ] || [ "$$confirm" = "S" ]; then \
-		echo "$(BLUE)📝 Fazendo commit...$(NC)"; \
+		echo "$(BLUE)🤖 Gerando mensagem de commit com IA...$(NC)"; \
 		git add -A; \
-		read -p "$(YELLOW)   Mensagem do commit: $(NC)" msg && \
-		git commit -m "$$msg" || echo "$(RED)⚠️  Nenhuma mudança para commitar$(NC)"; \
+		MSG=$$(node scripts/generate-commit-msg.js); \
+		echo "$(GREEN)📝 Mensagem gerada:$(NC)"; \
+		echo "$$MSG"; \
+		echo ""; \
+		read -p "$(YELLOW)   Usar esta mensagem? (S/n): $(NC)" useMsg; \
+		if [ "$$useMsg" != "n" ] && [ "$$useMsg" != "N" ]; then \
+			git commit -m "$$MSG" || echo "$(RED)⚠️  Nenhuma mudança para commitar$(NC)"; \
+		else \
+			read -p "$(YELLOW)   Digite a mensagem do commit: $(NC)" customMsg && \
+			git commit -m "$$customMsg" || echo "$(RED)⚠️  Nenhuma mudança para commitar$(NC)"; \
+		fi; \
 		echo "$(BLUE)📤 Fazendo push...$(NC)"; \
 		git push origin main || git push origin master; \
 		echo "$(GREEN)✅ Rollout concluído!$(NC)"; \
@@ -91,12 +100,21 @@ rollout: ## Faz o rollout completo (build + git commit + push)
 		echo "$(YELLOW)⏭️  Rollout cancelado. Build está pronto para commit manual.$(NC)"; \
 	fi
 
-rollout-auto: build ## Faz rollout automático sem confirmação (usa mensagem padrão)
+rollout-auto: build ## Faz rollout automático sem confirmação (usa mensagem gerada por IA)
 	@echo "$(BLUE)🚀 Iniciando rollout automático...$(NC)"
 	@git add -A
-	@git commit -m "Deploy: Build de produção $(shell date +'%Y-%m-%d %H:%M:%S')" || echo "$(YELLOW)⚠️  Nenhuma mudança para commitar$(NC)"
+	@echo "$(BLUE)🤖 Gerando mensagem de commit com IA...$(NC)"
+	@MSG=$$(node scripts/generate-commit-msg.js); \
+	echo "$(GREEN)📝 Mensagem: $$MSG$(NC)"; \
+	git commit -m "$$MSG" || echo "$(YELLOW)⚠️  Nenhuma mudança para commitar$(NC)"
 	@git push origin main || git push origin master
 	@echo "$(GREEN)✅ Rollout automático concluído!$(NC)"
+
+commit-msg: ## Gera uma mensagem de commit usando IA (sem fazer commit)
+	@echo "$(BLUE)🤖 Analisando mudanças e gerando mensagem de commit...$(NC)"
+	@echo ""
+	@node scripts/generate-commit-msg.js
+	@echo ""
 
 rollout-server: ## Executa deploy no servidor (via deploy.sh)
 	@echo "$(BLUE)🚀 Executando deploy no servidor...$(NC)"
@@ -135,6 +153,12 @@ status: ## Mostra status do Git e arquivos de produção
 	fi
 
 ##@ Utilitários
+
+commit-msg: ## Gera uma mensagem de commit usando IA (sem fazer commit)
+	@echo "$(BLUE)🤖 Analisando mudanças e gerando mensagem de commit...$(NC)"
+	@echo ""
+	@node scripts/generate-commit-msg.js
+	@echo ""
 
 info: ## Mostra informações do projeto
 	@echo "$(BLUE)ℹ️  Informações do projeto:$(NC)"
