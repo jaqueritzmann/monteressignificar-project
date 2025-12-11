@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #FFEFD4;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .font-title {
+    font-family: 'Bree Serif', serif;
+  }
+
+  .font-body {
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .font-highlight {
+    font-family: 'Caveat', cursive;
+  }
+
+  .card-rounded {
+    border-radius: 24px;
+  }
+
+  .card-rounded-lg {
+    border-radius: 32px;
+  }
+}
+
