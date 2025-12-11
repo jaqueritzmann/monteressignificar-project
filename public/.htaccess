@@ -1,20 +1,75 @@
-# Enable Rewrite Engine
+# ============================================
+# SECURITY: Block Directory Listing
+# ============================================
+Options -Indexes
+
+# ============================================
+# SECURITY: Block Access to Sensitive Files
+# ============================================
+<FilesMatch "^\.">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Block access to common sensitive files
+<FilesMatch "\.(env|log|ini|conf|config|bak|backup|old|orig|save|swp|tmp|temp|sql|db|sh|bat|cmd|ps1)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Block access to version control files
+<FilesMatch "^(\.git|\.svn|\.hg|\.bzr)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# ============================================
+# SECURITY: Block Access to Directories and Files
+# ============================================
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-  
+
+  # Block access to source directories
+  RewriteRule ^(src|node_modules|\.git|\.vscode|\.idea|scripts|\.github)(/.*)?$ - [F,L]
+
+  # Block access to configuration files in root
+  RewriteRule ^(package\.json|package-lock\.json|vite\.config\.js|tailwind\.config\.js|postcss\.config\.js|tsconfig\.json|jsconfig\.json|\.eslintrc|\.prettierrc|Makefile|README\.md)$ - [F,L]
+
+  # Block access to build tools and scripts directories
+  RewriteRule ^(scripts|\.github|\.gitignore|\.tool-versions)(/.*)?$ - [F,L]
+
+  # Block access to hidden files and directories (except .well-known for SSL)
+  RewriteCond %{REQUEST_URI} \/\..*$ [NC]
+  RewriteCond %{REQUEST_URI} !^/\.well-known
+  RewriteRule .* - [F,L]
+
+  # Block source map files outside assets directory
+  RewriteCond %{REQUEST_URI} \.(map)$
+  RewriteCond %{REQUEST_URI} !^/assets/
+  RewriteRule .* - [F,L]
+
+  # Block development file types outside assets
+  RewriteCond %{REQUEST_URI} \.(lock|log|md|jsx|tsx|vue|svelte|ts)$
+  RewriteCond %{REQUEST_URI} !^/assets/
+  RewriteRule .* - [F,L]
+
   # Handle Angular and React Router - redirect all requests to index.html
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^ index.html [L]
 </IfModule>
 
+# ============================================
 # Enable compression
+# ============================================
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
 </IfModule>
 
+# ============================================
 # Browser caching
+# ============================================
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType image/jpg "access plus 1 year"
@@ -28,9 +83,12 @@
   ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
 
+# ============================================
 # Security headers
+# ============================================
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>

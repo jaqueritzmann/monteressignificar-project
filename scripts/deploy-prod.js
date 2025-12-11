@@ -133,6 +133,14 @@ try {
     }
   }
 
+  // Ensure .htaccess is copied to dist (if it exists in root)
+  const rootHtaccess = join(rootDir, '.htaccess');
+  const distHtaccess = join(distDir, '.htaccess');
+  if (existsSync(rootHtaccess)) {
+    copyFileSync(rootHtaccess, distHtaccess);
+    console.log('✅ Copied .htaccess to dist/');
+  }
+
   console.log('✨ Production deployment complete!');
   console.log('📦 All static files are ready in root directory.');
   console.log('🌐 You can now upload these files to your static hosting server.');
@@ -140,6 +148,9 @@ try {
   console.log('💡 The index.html works in both development and production!');
   console.log('   - Development: npm run dev (auto-detects and uses /src/main.jsx)');
   console.log('   - Production: Serves static files from /assets/');
+  console.log('');
+  console.log('🔒 Note: .htaccess security rules only work on Apache servers in production.');
+  console.log('   They do NOT work with Vite dev server (npm run dev) - this is expected!');
 } catch (error) {
   console.error('❌ Deployment failed:', error.message);
   process.exit(1);
