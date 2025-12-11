@@ -20,9 +20,9 @@ function getGitStatus() {
 // Get git diff stats
 function getDiffStats() {
   try {
-    const stats = execSync('git diff --stat --cached 2>/dev/null || git diff --stat', { 
-      encoding: 'utf8', 
-      cwd: rootDir 
+    const stats = execSync('git diff --stat --cached 2>/dev/null || git diff --stat', {
+      encoding: 'utf8',
+      cwd: rootDir
     });
     return stats.trim();
   } catch (error) {
@@ -33,7 +33,7 @@ function getDiffStats() {
 // Analyze changes and generate commit message
 function generateCommitMessage() {
   const changes = getGitStatus();
-  
+
   if (changes.length === 0) {
     return 'chore: no changes to commit';
   }
@@ -58,7 +58,7 @@ function generateCommitMessage() {
   changes.forEach(change => {
     const [status, ...fileParts] = change.trim().split(/\s+/);
     const file = fileParts.join(' ');
-    
+
     // Analyze file type
     if (file.includes('assets/') || file.includes('dist/')) {
       hasAssets = true;
@@ -69,9 +69,9 @@ function generateCommitMessage() {
         const component = file.split('/').pop().replace('.jsx', '').replace('.js', '');
         componentChanges.push(component);
       }
-    } else if (file.includes('package.json') || file.includes('vite.config') || 
-               file.includes('tailwind.config') || file.includes('Makefile') ||
-               file.includes('scripts/')) {
+    } else if (file.includes('package.json') || file.includes('vite.config') ||
+      file.includes('tailwind.config') || file.includes('Makefile') ||
+      file.includes('scripts/')) {
       hasConfig = true;
     }
 
