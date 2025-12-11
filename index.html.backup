@@ -9,49 +9,50 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Hide body until correct script loads -->
     <style>
       body { opacity: 0; transition: opacity 0.2s; }
       body.loaded { opacity: 1; }
       /* Show error message if script fails */
-      .error-message { 
-        display: none; 
-        padding: 20px; 
-        text-align: center; 
-        color: #A44819; 
+      .error-message {
+        display: none;
+        padding: 20px;
+        text-align: center;
+        color: #A44819;
         font-family: 'DM Sans', sans-serif;
       }
       body.error .error-message { display: block; }
       body.error { opacity: 1 !important; }
     </style>
-    
+
     <!-- Production assets will be injected by inject-assets.js after build -->
     <!-- This script is needed for Vite to bundle the app -->
     <script type="module" src="/src/main.jsx"></script>
-    
+
     <!-- Environment detection (runs after scripts are parsed) -->
     <script>
       (function() {
         // Wait for DOM to be ready
         function init() {
           // Check if we're in development mode (Vite dev server)
-          const isDev = window.location.hostname === 'localhost' || 
-                       window.location.hostname === '127.0.0.1' ||
-                       window.location.port === '5173' ||
-                       window.location.hostname === '';
-          
+          const isDev = window.location.hostname === 'localhost' ||
+                        window.location.hostname === '127.0.0.1' ||
+                        window.location.port === '5173' ||
+                        window.location.port === '4173' ||
+                        window.location.hostname === '';
+
           if (isDev) {
             // Remove production scripts BEFORE they load
             const prodScripts = document.querySelectorAll('script[data-production]');
             prodScripts.forEach(script => {
               script.remove();
             });
-            
+
             // Remove production styles
             const prodStyles = document.querySelectorAll('link[href*="assets/index-"]');
             prodStyles.forEach(link => link.remove());
-            
+
             // Load development script immediately
             const script = document.createElement('script');
             script.type = 'module';
@@ -90,7 +91,7 @@
             }
           }
         }
-        
+
         // Run immediately - scripts are already in the DOM at this point
         // Use requestAnimationFrame to ensure DOM is fully parsed
         if (typeof requestAnimationFrame !== 'undefined') {
