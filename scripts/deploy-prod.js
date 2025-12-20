@@ -141,6 +141,17 @@ try {
     console.log('✅ Copied .htaccess to dist/');
   }
 
+  // Ensure SEO files (robots.txt, sitemap.xml) are in root
+  const seoFiles = ['robots.txt', 'sitemap.xml'];
+  for (const seoFile of seoFiles) {
+    const distSeoFile = join(distDir, seoFile);
+    const rootSeoFile = join(rootDir, seoFile);
+    if (existsSync(distSeoFile)) {
+      copyFileSync(distSeoFile, rootSeoFile);
+      console.log(`✅ Ensured ${seoFile} is in root`);
+    }
+  }
+
   console.log('✨ Production deployment complete!');
   console.log('📦 All static files are ready in root directory.');
   console.log('🌐 You can now upload these files to your static hosting server.');
