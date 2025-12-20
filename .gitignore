@@ -15,13 +15,13 @@
 !index.html
 !package-lock.json
 !package.json
+!public/
 !README.md
+!scripts/
+!src/
 .tool-versions
 Makefile
 postcss.config.js
-public
 README.md
-scripts
-src
 tailwind.config.js
 vite.config.js

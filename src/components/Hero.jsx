@@ -29,7 +29,7 @@ const Hero = () => {
             Lutamos todos os dias para que cada criança encontre proteção, amor e a chance de escrever uma nova história.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-0">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-0">
             <a href="#doacao-pix">
               <button 
                 className="px-10 py-4 bg-yellow text-terracotta rounded-full font-body font-bold text-[18px] hover:bg-yellow/90 transition-all duration-300"
@@ -40,7 +40,7 @@ const Hero = () => {
             </a>
             <a href="#sobre">
               <button 
-                className="px-10 py-4 border border-white rounded-full font-body text-white text-[18px] ml-4 hover:bg-white/10 transition-all duration-300"
+                className="px-10 py-4 border border-white rounded-full font-body text-white text-[18px] sm:ml-4 hover:bg-white/10 transition-all duration-300"
                 aria-label="Saiba mais sobre a Monte Ressignificar"
               >
                 Saiba mais

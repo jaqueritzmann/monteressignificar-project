@@ -1,0 +1,21 @@
+# robots.txt for Monte Ressignificar
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://monteressignificar.org.br/sitemap.xml
+
+# Disallow access to admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
