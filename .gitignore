@@ -17,7 +17,9 @@
 !package.json
 !public/
 !README.md
+!robots.txt
 !scripts/
+!sitemap.xml
 !src/
 .tool-versions
 Makefile
