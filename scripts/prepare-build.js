@@ -12,9 +12,96 @@ const cleanIndexHTML = `<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Monte Ressignificar - ONG</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>Monte Ressignificar - ONG | Ressignificando Infâncias, Reconstruindo Futuros</title>
+    <meta name="title" content="Monte Ressignificar - ONG | Ressignificando Infâncias, Reconstruindo Futuros" />
+    <meta name="description" content="A Monte Ressignificar é uma ONG comprometida com a transformação social e o bem-estar das comunidades mais vulneráveis. Criamos oportunidades, promovemos a inclusão e ressignificamos vidas através de projetos sociais, educacionais e de assistência em Curitiba, Paraná." />
+    <meta name="keywords" content="ONG, Monte Ressignificar, organização não governamental, projetos sociais, assistência social, Curitiba, Paraná, ressignificar vidas, transformação social, inclusão social, educação, crianças, comunidade vulnerável" />
+    <meta name="author" content="Associação Monte Ressignificar" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Portuguese" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="geo.region" content="BR-PR" />
+    <meta name="geo.placename" content="Curitiba" />
+    <meta name="geo.position" content="-25.4284;-49.2733" />
+    <meta name="ICBM" content="-25.4284, -49.2733" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://monteressignificar.org.br/" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://monteressignificar.org.br/" />
+    <meta property="og:title" content="Monte Ressignificar - ONG | Ressignificando Infâncias, Reconstruindo Futuros" />
+    <meta property="og:description" content="A Monte Ressignificar é uma ONG comprometida com a transformação social e o bem-estar das comunidades mais vulneráveis. Criamos oportunidades, promovemos a inclusão e ressignificamos vidas através de projetos sociais, educacionais e de assistência em Curitiba, Paraná." />
+    <meta property="og:image" content="https://monteressignificar.org.br/img/hero-section-atualizada.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Monte Ressignificar - Ressignificando Infâncias, Reconstruindo Futuros" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Monte Ressignificar" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://monteressignificar.org.br/" />
+    <meta name="twitter:title" content="Monte Ressignificar - ONG | Ressignificando Infâncias, Reconstruindo Futuros" />
+    <meta name="twitter:description" content="A Monte Ressignificar é uma ONG comprometida com a transformação social e o bem-estar das comunidades mais vulneráveis. Criamos oportunidades, promovemos a inclusão e ressignificamos vidas através de projetos sociais, educacionais e de assistência em Curitiba, Paraná." />
+    <meta name="twitter:image" content="https://monteressignificar.org.br/img/hero-section-atualizada.png" />
+    <meta name="twitter:image:alt" content="Monte Ressignificar - Ressignificando Infâncias, Reconstruindo Futuros" />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "Associação Monte Ressignificar",
+      "alternateName": "Monte Ressignificar",
+      "url": "https://monteressignificar.org.br",
+      "logo": "https://monteressignificar.org.br/img/logo-monte-ressignificar.png",
+      "image": "https://monteressignificar.org.br/img/hero-section-atualizada.png",
+      "description": "A Monte Ressignificar é uma organização não governamental comprometida com a transformação social e o bem-estar das comunidades mais vulneráveis. Criamos oportunidades, promovemos a inclusão e ressignificamos vidas através de projetos sociais, educacionais e de assistência.",
+      "foundingDate": "2024",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Curitiba",
+        "addressRegion": "PR",
+        "addressCountry": "BR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-41-99847-7251",
+        "contactType": "customer service",
+        "email": "monteressignificarcwb@gmail.com",
+        "availableLanguage": "Portuguese"
+      },
+      "sameAs": [
+        "https://www.instagram.com/projetoressignificar.cwb",
+        "https://www.facebook.com/profile.php?id=61576007967188"
+      ],
+      "taxID": "62.413.164/0001-06",
+      "areaServed": {
+        "@type": "City",
+        "name": "Curitiba"
+      },
+      "knowsAbout": [
+        "Assistência Social",
+        "Educação",
+        "Inclusão Social",
+        "Projetos Sociais",
+        "Transformação Social"
+      ]
+    }
+    </script>
+    
+    <!-- Additional SEO -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/img/logo.svg" />
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+    <link rel="apple-touch-icon" href="/img/logo-monte-ressignificar.png" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
