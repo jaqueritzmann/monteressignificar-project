@@ -19,40 +19,81 @@
     <meta name="ICBM" content="-25.4284, -49.2733" />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://monteressignificar.org.br/" />
+    <link rel="canonical" href="https://monteressignificar.com.br/" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://monteressignificar.org.br/" />
+    <meta property="og:url" content="https://monteressignificar.com.br/" />
     <meta property="og:title" content="Monte Ressignificar - ONG | Ressignificando Infâncias, Reconstruindo Futuros" />
     <meta property="og:description" content="A Monte Ressignificar é uma ONG comprometida com a transformação social e o bem-estar das comunidades mais vulneráveis. Criamos oportunidades, promovemos a inclusão e ressignificamos vidas através de projetos sociais, educacionais e de assistência em Curitiba, Paraná." />
-    <meta property="og:image" content="https://monteressignificar.org.br/img/hero-section-atualizada.png" />
+    <meta property="og:image" content="https://monteressignificar.com.br/img/hero-section-atualizada.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Monte Ressignificar - Ressignificando Infâncias, Reconstruindo Futuros" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Monte Ressignificar" />
+    <meta property="og:logo" content="https://monteressignificar.com.br/img/logo512.png" />
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://monteressignificar.org.br/" />
+    <meta name="twitter:url" content="https://monteressignificar.com.br/" />
     <meta name="twitter:title" content="Monte Ressignificar - ONG | Ressignificando Infâncias, Reconstruindo Futuros" />
     <meta name="twitter:description" content="A Monte Ressignificar é uma ONG comprometida com a transformação social e o bem-estar das comunidades mais vulneráveis. Criamos oportunidades, promovemos a inclusão e ressignificamos vidas através de projetos sociais, educacionais e de assistência em Curitiba, Paraná." />
-    <meta name="twitter:image" content="https://monteressignificar.org.br/img/hero-section-atualizada.png" />
+    <meta name="twitter:image" content="https://monteressignificar.com.br/img/hero-section-atualizada.png" />
     <meta name="twitter:image:alt" content="Monte Ressignificar - Ressignificando Infâncias, Reconstruindo Futuros" />
     
-    <!-- Structured Data (JSON-LD) -->
+    <!-- Structured Data (JSON-LD) - Organization (preferred by Google for logo display) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://monteressignificar.com.br/#organization",
+      "name": "Associação Monte Ressignificar",
+      "alternateName": "Monte Ressignificar",
+      "url": "https://monteressignificar.com.br",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://monteressignificar.com.br/img/logo512.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://monteressignificar.com.br/img/logo512.png",
+      "description": "A Monte Ressignificar é uma organização não governamental comprometida com a transformação social e o bem-estar das comunidades mais vulneráveis. Criamos oportunidades, promovemos a inclusão e ressignificamos vidas através de projetos sociais, educacionais e de assistência.",
+      "foundingDate": "2025-03-17",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Curitiba",
+        "addressRegion": "PR",
+        "addressCountry": "BR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-41-99847-7251",
+        "contactType": "customer service",
+        "email": "monteressignificarcwb@gmail.com",
+        "availableLanguage": "Portuguese"
+      },
+      "sameAs": [
+        "https://www.instagram.com/projetoressignificar.cwb",
+        "https://www.facebook.com/profile.php?id=61576007967188"
+      ],
+      "taxID": "62.413.164/0001-06"
+    }
+    </script>
+    
+    <!-- Additional Structured Data - NGO type for semantic completeness -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "NGO",
+      "@id": "https://monteressignificar.com.br/#ngo",
       "name": "Associação Monte Ressignificar",
       "alternateName": "Monte Ressignificar",
-      "url": "https://monteressignificar.org.br",
-      "logo": "https://monteressignificar.org.br/img/logo-monte-ressignificar.png",
-      "image": "https://monteressignificar.org.br/img/hero-section-atualizada.png",
+      "url": "https://monteressignificar.com.br",
+      "logo": "https://monteressignificar.com.br/img/logo512.png",
+      "image": "https://monteressignificar.com.br/img/hero-section-atualizada.png",
       "description": "A Monte Ressignificar é uma organização não governamental comprometida com a transformação social e o bem-estar das comunidades mais vulneráveis. Criamos oportunidades, promovemos a inclusão e ressignificamos vidas através de projetos sociais, educacionais e de assistência.",
-      "foundingDate": "2024",
+      "foundingDate": "2025-03-17",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Curitiba",
@@ -89,9 +130,12 @@
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/img/logo.svg" />
-    <link rel="icon" type="image/png" href="/img/logo.png" />
-    <link rel="apple-touch-icon" href="/img/logo-monte-ressignificar.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=3" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=3" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=3" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png?v=3" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png?v=3" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
