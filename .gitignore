@@ -11,6 +11,7 @@
 !.htaccess
 !assets/
 !assets/**
+!dist/
 !img/
 !index.html
 !package-lock.json

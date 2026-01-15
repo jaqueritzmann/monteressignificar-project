@@ -1,0 +1,6 @@
+# robots.txt for Monte Ressignificar
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://monteressignificar.com.br/sitemap.xml
