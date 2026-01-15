@@ -2,6 +2,7 @@ import React from 'react'
 import Hero from './components/Hero'
 import Tagline from './components/Tagline'
 import About from './components/About'
+import MissionVisionValues from './components/MissionVisionValues'
 import Projects from './components/Projects'
 import Team from './components/Team'
 import HowToHelp from './components/HowToHelp'
@@ -15,6 +16,7 @@ function App() {
       <Hero />
       <Tagline />
       <About />
+      <MissionVisionValues />
       <Projects />
       <Team />
       <HowToHelp />

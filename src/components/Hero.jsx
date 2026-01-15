@@ -18,21 +18,24 @@ const Hero = () => {
       {/* Overlay em degradê terracota da esquerda para direita - mais suave à direita */}
       <div className="absolute inset-0 bg-gradient-to-r from-terracotta/80 via-terracotta/40 to-transparent"></div>
       
+      {/* Overlay escuro para melhorar legibilidade - mais forte no mobile para contraste AA */}
+      <div className="absolute inset-0 bg-black/50 md:bg-black/15"></div>
+      
       <div className="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10 w-full">
-        <div className="max-w-[550px] pt-[130px] pb-[140px] lg:pt-[150px] lg:pb-[160px]">
-          <h1 className="font-title text-[46px] leading-[1.15] font-bold text-white">
+        <div className="max-w-[550px] pt-[130px] pb-[180px] lg:pt-[150px] lg:pb-[160px]">
+          <h1 className="font-title text-[38px] leading-[1.3] lg:text-[46px] lg:leading-[1.15] font-bold text-white">
             Ressignificando infâncias,<br />
             Reconstruindo futuros.
           </h1>
           
-          <p className="font-body text-[24px] leading-[1.5] text-white max-w-[520px] mt-4 mb-10">
+          <p className="font-body text-[24px] leading-[1.5] text-white max-w-[520px] mt-4 mb-12 md:mb-10">
             Lutamos todos os dias para que cada criança encontre proteção, amor e a chance de escrever uma nova história.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-0">
-            <a href="#doacao-pix">
+            <a href="#doacao-pix" className="block w-full sm:inline-block sm:w-auto">
               <button 
-                className="px-10 py-4 bg-yellow text-terracotta rounded-full font-body font-bold text-[18px] hover:bg-yellow/90 transition-all duration-300"
+                className="w-full sm:w-auto px-10 py-4 min-h-[48px] bg-yellow text-green-olive rounded-full font-body font-bold text-[18px] hover:bg-yellow/90 transition-all duration-300"
                 aria-label="Contribuir agora para a Monte Ressignificar"
               >
                 Contribuir agora
@@ -54,4 +57,3 @@ const Hero = () => {
 }
 
 export default Hero
-

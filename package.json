@@ -5,11 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "clean": "rm -rf dist node_modules/.vite .vite",
+    "clean": "rm -rf dist",
+    "clean:cache": "rm -rf node_modules/.vite .vite",
+    "clean:all": "npm run clean && npm run clean:cache",
     "clean:assets": "rm -rf assets",
     "prebuild": "node scripts/prepare-build.js",
     "build": "npm run clean && npm run prebuild && vite build && node scripts/inject-assets.js && node scripts/deploy-prod.js",
     "build:only": "npm run prebuild && vite build",
+    "build:fast": "npm run prebuild && vite build && node scripts/inject-assets.js && node scripts/deploy-prod.js",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -27,7 +27,15 @@ install: ## Instala as dependências do projeto
 	@npm install
 	@echo "$(GREEN)✅ Dependências instaladas!$(NC)"
 
-dev: ## Inicia o servidor de desenvolvimento
+dev: ## Inicia o servidor de desenvolvimento (instala dependências apenas se necessário)
+	@if [ ! -d "node_modules" ]; then \
+		echo "$(BLUE)📦 Instalando dependências...$(NC)"; \
+		npm install; \
+		echo "$(GREEN)✅ Dependências instaladas!$(NC)"; \
+	else \
+		echo "$(GREEN)✅ Dependências já instaladas (pulando npm install)$(NC)"; \
+	fi
+	@echo ""
 	@echo "$(BLUE)🚀 Iniciando servidor de desenvolvimento...$(NC)"
 	@npm run dev
 
@@ -37,10 +45,15 @@ preview: ## Visualiza o build de produção localmente
 
 ##@ Build
 
-build: ## Faz o build completo para produção
+build: ## Faz o build completo para produção (limpa dist antes)
 	@echo "$(BLUE)🔨 Fazendo build para produção...$(NC)"
 	@npm run build
 	@echo "$(GREEN)✅ Build concluído!$(NC)"
+
+build-fast: ## Faz build rápido sem limpar cache (mais rápido para desenvolvimento)
+	@echo "$(BLUE)⚡ Fazendo build rápido (sem limpar cache)...$(NC)"
+	@npm run build:fast
+	@echo "$(GREEN)✅ Build rápido concluído!$(NC)"
 
 build-only: ## Faz apenas o build sem deploy
 	@echo "$(BLUE)🔨 Fazendo build (sem deploy)...$(NC)"
@@ -49,18 +62,23 @@ build-only: ## Faz apenas o build sem deploy
 
 ##@ Limpeza
 
-clean: ## Remove arquivos temporários e cache
+clean: ## Remove arquivos temporários (dist apenas, mantém cache)
 	@echo "$(YELLOW)🧹 Limpando arquivos temporários...$(NC)"
 	@npm run clean
 	@echo "$(GREEN)✅ Limpeza concluída!$(NC)"
 
-clean-all: clean ## Remove tudo incluindo node_modules e assets
+clean-cache: ## Remove cache do Vite (use quando houver problemas com cache)
+	@echo "$(YELLOW)🧹 Limpando cache do Vite...$(NC)"
+	@npm run clean:cache
+	@echo "$(GREEN)✅ Cache limpo!$(NC)"
+
+clean-all: clean clean-cache ## Remove tudo incluindo node_modules e assets
 	@echo "$(YELLOW)🧹 Limpando tudo (node_modules, assets, dist)...$(NC)"
 	@rm -rf node_modules
 	@rm -rf assets
-	@rm -rf dist
 	@rm -f index.html.backup
 	@echo "$(GREEN)✅ Limpeza completa concluída!$(NC)"
+
 
 ##@ Deploy e Rollout
 

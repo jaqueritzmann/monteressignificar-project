@@ -25,10 +25,10 @@ const Team = () => {
     },
     {
       id: 4,
-      name: "Juliana Savy Moura",
-      role: "Tesoureira",
-      image: "/img/Juliana-tesoureira.jpeg",
-      alt: "Foto de Juliana Savy Moura, tesoureira da Monte Ressignificar"
+      name: "Wagner dos Santos Baptista",
+      role: "Tesoureiro",
+      image: "/img/Wagner-tesoureiro.jpeg",
+      alt: "Foto de Wagner dos Santos Baptista"
     }
   ]
 

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 function ProjetoCard({ imageSrc, title, alt }) {
   return (
@@ -23,6 +24,11 @@ function ProjetoCard({ imageSrc, title, alt }) {
 }
 
 const Projects = () => {
+  const scrollContainerRef = useRef(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(true)
+
   const projects = [
     {
       id: 1,
@@ -74,6 +80,59 @@ const Projects = () => {
     }
   ]
 
+  // Função para verificar se pode rolar
+  const checkScrollability = () => {
+    if (!scrollContainerRef.current) return
+    
+    const container = scrollContainerRef.current
+    const { scrollLeft, scrollWidth, clientWidth } = container
+    
+    setCanScrollLeft(scrollLeft > 10)
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
+    
+    // Calcular índice atual baseado na posição do scroll
+    const cardWidth = 241 + 24 // largura do card + gap
+    const newIndex = Math.min(
+      Math.round(scrollLeft / cardWidth),
+      projects.length - 1
+    )
+    setCurrentIndex(Math.max(0, newIndex))
+  }
+
+  // Scroll para esquerda
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      const cardWidth = 241 + 24 // largura do card + gap
+      scrollContainerRef.current.scrollBy({
+        left: -cardWidth,
+        behavior: 'smooth'
+      })
+    }
+  }
+
+  // Scroll para direita
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      const cardWidth = 241 + 24 // largura do card + gap
+      scrollContainerRef.current.scrollBy({
+        left: cardWidth,
+        behavior: 'smooth'
+      })
+    }
+  }
+
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    checkScrollability()
+    container.addEventListener('scroll', checkScrollability)
+    
+    return () => {
+      container.removeEventListener('scroll', checkScrollability)
+    }
+  }, [])
+
   return (
     <section id="projetos" className="bg-[#CE8A39] py-section">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-8 flex flex-col items-center">
@@ -86,15 +145,88 @@ const Projects = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 justify-items-center w-full">
-          {projects.map((project) => (
-            <ProjetoCard
-              key={project.id}
-              imageSrc={project.image}
-              title={project.title}
-              alt={project.alt}
-            />
-          ))}
+        {/* Grid no desktop, carrossel horizontal no mobile */}
+        <div className="w-full relative">
+          {/* Container mobile: carrossel horizontal */}
+          <div className="md:hidden relative">
+            {/* Setas de navegação */}
+            {canScrollLeft && (
+              <button
+                onClick={scrollLeft}
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-terracotta rounded-full shadow-xl border-2 border-offwhite/30 text-offwhite hover:bg-[#8B3A14] active:scale-95 transition-all duration-200"
+                aria-label="Projeto anterior"
+              >
+                <FaChevronLeft className="w-5 h-5" />
+              </button>
+            )}
+            
+            {canScrollRight && (
+              <button
+                onClick={scrollRight}
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-terracotta rounded-full shadow-xl border-2 border-offwhite/30 text-offwhite hover:bg-[#8B3A14] active:scale-95 transition-all duration-200"
+                aria-label="Próximo projeto"
+              >
+                <FaChevronRight className="w-5 h-5" />
+              </button>
+            )}
+
+            {/* Carrossel */}
+            <div 
+              ref={scrollContainerRef}
+              className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-6 px-6"
+            >
+              {projects.map((project) => (
+                <div key={project.id} className="flex-shrink-0 snap-center">
+                  <ProjetoCard
+                    imageSrc={project.image}
+                    title={project.title}
+                    alt={project.alt}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Indicadores de posição (bolinhas) */}
+            <div className="flex justify-center gap-2 mt-4">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    if (scrollContainerRef.current) {
+                      const cardWidth = 241 + 24
+                      const targetScroll = index * cardWidth
+                      scrollContainerRef.current.scrollTo({
+                        left: targetScroll,
+                        behavior: 'smooth'
+                      })
+                      // Atualizar índice após um pequeno delay para sincronizar com o scroll
+                      setTimeout(() => {
+                        setCurrentIndex(index)
+                      }, 100)
+                    }
+                  }}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === currentIndex
+                      ? 'bg-offwhite w-6'
+                      : 'bg-offwhite/40 w-2 hover:bg-offwhite/60'
+                  }`}
+                  aria-label={`Ir para projeto ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+          
+          {/* Grid desktop */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 justify-items-center w-full">
+            {projects.map((project) => (
+              <ProjetoCard
+                key={project.id}
+                imageSrc={project.image}
+                title={project.title}
+                alt={project.alt}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

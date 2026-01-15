@@ -43,7 +43,7 @@ const CallToAction = () => {
                 rel="noopener noreferrer"
               >
                 <button 
-                  className="px-10 py-4 bg-yellow text-terracotta rounded-full font-body font-bold text-[18px] hover:bg-yellow/90 transition-all duration-300"
+                  className="px-10 py-4 bg-yellow text-green-olive rounded-full font-body font-bold text-[18px] hover:bg-yellow/90 transition-all duration-300"
                   aria-label="Contribuir para a construção da Casa Lar"
                 >
                   Quero ajudar

@@ -19,15 +19,11 @@ const About = () => {
           </h2>
           
           <p className="font-body text-[18px] leading-relaxed text-green-olive mb-[16px]">
-            <span className="font-semibold">A Monte Ressignificar</span> é uma organização não governamental comprometida com a transformação social e o bem-estar das comunidades mais vulneráveis.
-          </p>
-          
-          <p className="font-body text-[18px] leading-relaxed text-green-olive mb-[16px]">
-            <span className="font-semibold">Propósito:</span> criar oportunidades, promover a inclusão e ressignificar vidas através de projetos sociais, educacionais e de assistência.
+            A Associação Monte Ressignificar foi fundada em 17 de março de 2025, com a missão de atuar como casa lar para crianças de 5 a 10 anos em situação de vulnerabilidade social que, por determinação judicial, necessitam ser acolhidas em uma instituição de acolhimento.
           </p>
           
           <p className="font-body text-[18px] leading-relaxed text-green-olive">
-            Trabalhamos com dedicação e amor, acreditando que cada ação pode fazer a diferença e construir um futuro melhor para todos.
+            Nosso propósito é oferecer cuidado, segurança, afeto e oportunidades para que essas crianças possam ressignificar suas histórias e reconstruir seus caminhos com dignidade e esperança.
           </p>
         </div>
         

@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://monteressignificar.org.br/sitemap.xml
+Sitemap: https://monteressignificar.com.br/sitemap.xml

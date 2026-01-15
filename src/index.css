@@ -40,5 +40,25 @@
   .card-rounded-lg {
     border-radius: 32px;
   }
+
+  /* Classe reutilizável para botões amarelos - garante cor de texto consistente */
+  .btn-yellow {
+    background-color: #F8B82D;
+    color: #3F4021;
+  }
+
+  .btn-yellow:hover {
+    background-color: rgba(248, 184, 45, 0.9);
+  }
+
+  /* Esconder scrollbar mas manter funcionalidade de scroll */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
 }
 

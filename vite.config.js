@@ -27,9 +27,10 @@ export default defineConfig({
       }
     }
   },
-  // Desabilitar cache durante build para garantir que mudanças sejam detectadas
+  // Cache optimization dependencies for faster builds
+  // Only force re-optimization when dependencies change (remove force: true)
   optimizeDeps: {
-    force: true
+    // force: true // Removed - only enable when dependencies change
   }
 })
 

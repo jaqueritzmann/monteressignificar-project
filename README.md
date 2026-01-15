@@ -96,3 +96,23 @@ src/
 - Mobile: < 768px (1 coluna)
 - Tablet: 768px - 1024px (2 colunas)
 - Desktop: > 1px (3 colunas onde aplicável)
+
+## 🎯 Favicon
+
+O projeto utiliza favicons PNG otimizados em múltiplos tamanhos. O arquivo `public/favicon.ico` atual é um PNG renomeado (temporário).
+
+### Criar favicon.ico real (multi-size)
+
+Para gerar um arquivo `.ico` real com múltiplos tamanhos (16x16, 32x32, 48x48):
+
+1. **Usando favicon.io (recomendado):**
+   - Acesse: https://favicon.io/favicon-converter/
+   - Faça upload de `public/favicon-32x32.png` ou `public/img/logo512.png`
+   - Baixe o arquivo `favicon.ico` gerado
+   - Substitua `public/favicon.ico` pelo arquivo baixado
+
+2. **Alternativa - Online:**
+   - https://www.favicon-generator.org/
+   - https://realfavicongenerator.net/
+
+**Nota:** Os favicons PNG (16x16, 32x32) já estão configurados e funcionam corretamente. O arquivo `.ico` é opcional para compatibilidade com navegadores mais antigos.
