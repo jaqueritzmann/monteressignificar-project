@@ -22,10 +22,10 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black/50 md:bg-black/15"></div>
       
       <div className="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10 w-full">
-        <div className="max-w-[550px] pt-[130px] pb-[180px] lg:pt-[150px] lg:pb-[160px]">
+        <div className="max-w-[550px] pt-[170px] pb-[210px] lg:pt-[190px] lg:pb-[190px]">
           <h1 className="font-title text-[38px] leading-[1.3] lg:text-[46px] lg:leading-[1.15] font-bold text-white">
-            Ressignificando infâncias,<br />
-            Reconstruindo futuros.
+            <span className="block sm:whitespace-nowrap">Ressignificando infâncias,</span>
+            <span className="block sm:whitespace-nowrap">Reconstruindo futuros.</span>
           </h1>
           
           <p className="font-body text-[24px] leading-[1.5] text-white max-w-[520px] mt-4 mb-12 md:mb-10">
@@ -41,9 +41,9 @@ const Hero = () => {
                 Contribuir agora
               </button>
             </a>
-            <a href="#sobre">
+            <a href="#sobre" className="block w-full sm:inline-block sm:w-auto">
               <button 
-                className="px-10 py-4 border border-white rounded-full font-body text-white text-[18px] sm:ml-4 hover:bg-white/10 transition-all duration-300"
+                className="w-full sm:w-auto px-10 py-4 min-h-[48px] border border-white rounded-full font-body text-white text-[18px] sm:ml-4 hover:bg-white/10 transition-all duration-300"
                 aria-label="Saiba mais sobre a Monte Ressignificar"
               >
                 Saiba mais
