@@ -105,7 +105,7 @@ if __name__ == '__main__':
     project_root = os.path.dirname(script_dir)
     
     input_path = os.path.join(project_root, 'public', 'img', 'logo512.png')
-    output_path = os.path.join(project_root, 'public', 'favicon-source-512.png')
+    output_path = os.path.join(project_root, 'public', 'img', 'favicon-source-512.png')
     
     if not os.path.exists(input_path):
         print(f"✗ Erro: Arquivo não encontrado: {input_path}")

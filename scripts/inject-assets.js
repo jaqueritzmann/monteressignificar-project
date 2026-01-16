@@ -40,9 +40,9 @@ const universalIndexHTML = `<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-source-512.png?v=1" />
-    <link rel="shortcut icon" type="image/png" href="/favicon-source-512.png?v=1" />
-    <link rel="apple-touch-icon" sizes="512x512" href="/favicon-source-512.png?v=1" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/img/favicon-source-512.png?v=1" />
+    <link rel="shortcut icon" type="image/png" href="/img/favicon-source-512.png?v=1" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/img/favicon-source-512.png?v=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Monte Ressignificar - ONG</title>
     <!-- Google Fonts -->
