@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, copyFileSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -6,6 +6,34 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const rootDir = join(__dirname, '..');
 const indexHtmlPath = join(rootDir, 'index.html');
+const publicDir = join(rootDir, 'public');
+
+function syncFaviconsToPublic() {
+  const faviconFiles = [
+    'favicon.ico',
+    'favicon-16x16.png',
+    'favicon-32x32.png',
+    'favicon-48x48.png',
+    'apple-touch-icon.png',
+    'android-chrome-192x192.png',
+    'android-chrome-512x512.png',
+    'site.webmanifest'
+  ];
+
+  mkdirSync(publicDir, { recursive: true });
+
+  for (const fileName of faviconFiles) {
+    const rootFile = join(rootDir, fileName);
+    const publicFile = join(publicDir, fileName);
+
+    if (existsSync(rootFile)) {
+      copyFileSync(rootFile, publicFile);
+      console.log(`✅ Synced ${fileName} -> public/`);
+    }
+  }
+}
+
+syncFaviconsToPublic();
 
 // Create a clean index.html for Vite build (without asset references)
 const cleanIndexHTML = `<!doctype html>
@@ -141,6 +169,7 @@ const cleanIndexHTML = `<!doctype html>
     
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
