@@ -12,7 +12,6 @@
 !assets/
 !assets/**
 !dist/
-!favicon-source-512.png
 !img/
 !index.html
 !package-lock.json
